@@ -74,6 +74,7 @@ else
     hi Visual cterm=reverse ctermfg=Gray ctermbg=Black
     hi TermCursor cterm=reverse ctermfg=NONE ctermbg=NONE
 endif
+
 highlight! link Boolean Normal
 highlight! link Delimiter Normal
 highlight! link Identifier Normal

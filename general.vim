@@ -1,12 +1,24 @@
 set nocompatible 
 syntax on
-set tabstop=3
-set shiftwidth=3
-set expandtab
+set shortmess+=I
+set tabstop=4
+set shiftwidth=4
+"set expandtab
+set autoindent
+set smartindent
+set cindent
 set termguicolors
-set number
+set backspace=indent,eol,start
+set mouse=a
+set laststatus=2
+set autochdir
+set nobackup
+set noundofile
+set scrolloff=10
+"set number
+set nonumber
 set path+=** " search down into subfolders (for tab-complete)
 set wildmenu " display all matching files for tab-complete
-filetype off 
-filetype plugin indent on
-
+:filetype on
+:filetype indent on
+"
