@@ -1,8 +1,8 @@
 set nocompatible 
 syntax on
 set shortmess+=I
-set tabstop=4
-set shiftwidth=4
+set tabstop=8
+set shiftwidth=8
 "set expandtab
 set autoindent
 set smartindent

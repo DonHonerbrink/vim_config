@@ -2,8 +2,8 @@
 "colorscheme anderson
 "colorscheme monochrome
 "colorscheme dracula
-"colorscheme ayu
-colorscheme simple-dark
+colorscheme ayu
+"colorscheme simple-dark
 "
 " Hack to fix Type highlighting for c type structs and enums
 " when opening multiple panels
