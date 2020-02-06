@@ -1,4 +1,4 @@
-set nocompatible 
+"set nocompatible 
 syntax on
 set shortmess+=I
 set tabstop=8
