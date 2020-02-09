@@ -4,7 +4,7 @@ call plug#begin('~/.vim/bundle')
    Plug 'vim-syntastic/syntastic'
    
    "themes
-   "Plug 'rafi/awesome-vim-colorschemes'
+   Plug 'rafi/awesome-vim-colorschemes'
    "Plug 'altercation/vim-colors-solarized'
    "Plug 'morhetz/gruvbox'
    "Plug 'fxn/vim-monochrome'
