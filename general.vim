@@ -9,7 +9,7 @@ set smartindent
 set cindent
 set termguicolors
 set backspace=indent,eol,start
-set mouse=a
+"set mouse=a
 set laststatus=2
 set autochdir
 set nobackup
@@ -19,6 +19,10 @@ set scrolloff=10
 set nonumber
 set path+=** " search down into subfolders (for tab-complete)
 set wildmenu " display all matching files for tab-complete
-:filetype on
-:filetype indent on
+filetype on
+filetype indent on
+
+" required for autocompletion
+set nocp " non vi compatible mode
+filetype plugin on " enable plugins
 "

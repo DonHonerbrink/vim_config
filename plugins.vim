@@ -2,9 +2,10 @@ call plug#begin('~/.vim/bundle')
    Plug 'scrooloose/nerdtree'
    Plug 'bling/vim-airline'
    Plug 'vim-syntastic/syntastic'
-   Plug 'vim-scripts/TagHighlight'
-   Plug 'kien/ctrlp.vim'
-   Plug 'majutsushi/tagbar'
+   Plug 'vim-scripts/TagHighlight'	" color highlighting for C
+   Plug 'vim-scripts/OmniCppComplete'	" autocompletion tool
+   Plug 'kien/ctrlp.vim'		" symbol search
+   Plug 'majutsushi/tagbar'		" shows symbols in file
    
    "themes
    Plug 'rafi/awesome-vim-colorschemes'
