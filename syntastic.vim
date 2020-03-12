@@ -9,10 +9,10 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_cpp_compiler = 'g++'
 let g:syntastic_cpp_check_header = 1
-let g:syntastic_cpp_config_file = '~/sledstorm/.syntastic_cpp_config'
+let g:syntastic_cpp_config_file = '~/projects/sledstorm/.syntastic_cpp_config'
 let g:syntastic_quiet_messages = {"regex": ["pragma once"] }
 let g:syntastic_c_compiler = 'g++'
 let g:syntastic_c_check_header = 1
-let g:syntastic_c_config_file = '~/sledstorm/.syntastic_cpp_config'
+let g:syntastic_c_config_file = '~/projects/sledstorm/.syntastic_cpp_config'
 let g:syntastic_quiet_messages = {"regex": ["pragma once"] }
 

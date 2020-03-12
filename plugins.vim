@@ -2,6 +2,9 @@ call plug#begin('~/.vim/bundle')
    Plug 'scrooloose/nerdtree'
    Plug 'bling/vim-airline'
    Plug 'vim-syntastic/syntastic'
+   Plug 'vim-scripts/TagHighlight'
+   Plug 'kien/ctrlp.vim'
+   Plug 'majutsushi/tagbar'
    
    "themes
    Plug 'rafi/awesome-vim-colorschemes'

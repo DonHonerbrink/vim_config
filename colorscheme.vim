@@ -16,12 +16,13 @@ augroup custom_highlighting
 augroup END
 
 function! PjHighlighting()
-syn match Type /pj_\w*\(\s\|)\)/ 
-syn match Type /ss_\w*\(\s\|)\)/ 
-syn match Type /\w*_t\(\s\|)\)/ 
-syn match Constant /GL_\w*/
-syn match Constant /PJ_\w*/
-syn match Constant /SS_\w*/
+"syn match Type /pj_\w*\(\s\|)\)/ 
+"syn match Type /ss_\w*\(\s\|)\)/ 
+"syn match Type /\w*_t\(\s\|)\)/ 
+"syn match Constant /GL_\w*/
+"syn match Constant /PJ_\w*/
+"syn match Constant /SS_\w*/
+"syn match Constant /NULL/
 syn match    cCustomParen    "(" contains=cParen,cCppParen
 syn match    cCustomFunc     "\w\+\s*(" contains=cCustomParen
 syn match    cCustomScope    "::"
