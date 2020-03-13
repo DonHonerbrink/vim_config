@@ -24,17 +24,18 @@ let g:syntastic_c_config_file = '~/.syntastic'
 
 " load a local vim file
 if !exists("*LoadSyntasticConfig")
-  function! LoadProjectVimrc()
+  function! LoadSyntasticConfig()
     let vimrcFile = findfile(".syntastic", ".;")
 
     if !empty(vimrcFile)
       let g:syntastic_cpp_config_file = l:vimrcFile
       let g:syntastic_c_config_file = l:vimrcFile
-      "execute ":so" l:vimrcFile
-      "echom l:vimrcFile
     endif
 
   endfunction
 endif
-autocmd DirChanged * :call LoadProjectVimrc()
+
+autocmd DirChanged * :call LoadSyntasticConfig()
+
+call LoadSyntasticConfig()
 
