@@ -13,14 +13,18 @@
 "colorscheme github
 "colorscheme lucid
 "colorscheme jellybeans
-colorscheme happy_hacking
+"colorscheme happy_hacking
 "colorscheme purify
 
 "set background=dark
+"colorscheme emacs
 "colorscheme PaperColor
 "colorscheme pink-moon
 "
 
+colorscheme base16-default-dark
 
+
+set cursorline
 
 

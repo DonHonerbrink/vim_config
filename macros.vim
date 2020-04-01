@@ -1,5 +1,3 @@
-map <C-r> :bp<CR>
-map <C-t> :bn<CR>
 noremap <silent> <Leader>c :echo system(findfile('ctags.sh', ';'))<CR>:UpdateTypesFile<CR>
 noremap <silent> <Leader>b :TagbarToggle<CR>
 noremap <Leader>. :CtrlPTag<CR>
