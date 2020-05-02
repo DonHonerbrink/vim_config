@@ -5,6 +5,7 @@
 "colorscheme ayu
 "colorscheme afterglow
 "colorscheme simple-dark
+colorscheme 1989
 "colorscheme apprentice
 "colorscheme atom
 "colorscheme challenger_deep
@@ -22,9 +23,9 @@
 "colorscheme pink-moon
 "
 
-colorscheme base16-default-dark
+"colorscheme base16-default-dark
 
 
 set cursorline
-
+"hi Normal guibg=NONE ctermbg=NONE
 
