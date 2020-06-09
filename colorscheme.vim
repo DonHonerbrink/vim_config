@@ -5,8 +5,11 @@
 "colorscheme ayu
 "colorscheme afterglow
 "colorscheme simple-dark
-colorscheme 1989
-"colorscheme apprentice
+"colorscheme 1989
+"colorscheme Iosvkem
+"colorscheme Monosvkem
+"colorscheme gruvbox8_hard
+colorscheme apprentice
 "colorscheme atom
 "colorscheme challenger_deep
 "colorscheme deep-space
@@ -16,6 +19,7 @@ colorscheme 1989
 "colorscheme jellybeans
 "colorscheme happy_hacking
 "colorscheme purify
+"colorscheme gruvbox
 
 "set background=dark
 "colorscheme emacs

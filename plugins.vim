@@ -8,7 +8,8 @@ call plug#begin('~/.vim/bundle')
    Plug 'majutsushi/tagbar'		" shows symbols in file
    
    "themes
-   Plug 'https://github.com/flazz/vim-colorschemes.git'
+   Plug 'lifepillar/vim-gruvbox8'
+   Plug 'flazz/vim-colorschemes'
    Plug 'rafi/awesome-vim-colorschemes'
    Plug 'chriskempson/base16-vim'
    "Plug 'altercation/vim-colors-solarized'
@@ -18,5 +19,7 @@ call plug#begin('~/.vim/bundle')
    Plug 'sonph/onehalf'
    "Plug 'arcticicestudio/nord-vim'
    "Plug 'tlhr/anderson.vim'
+   Plug 'neutaaaaan/iosvkem'
+   Plug 'neutaaaaan/monosvkem'
 call plug#end()
 
