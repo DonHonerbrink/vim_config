@@ -9,7 +9,7 @@
 "colorscheme Iosvkem
 "colorscheme Monosvkem
 "colorscheme gruvbox8_hard
-colorscheme apprentice
+"colorscheme apprentice
 "colorscheme atom
 "colorscheme challenger_deep
 "colorscheme deep-space
@@ -27,7 +27,7 @@ colorscheme apprentice
 "colorscheme pink-moon
 "
 
-"colorscheme base16-default-dark
+colorscheme base16-default-dark
 
 
 set cursorline
