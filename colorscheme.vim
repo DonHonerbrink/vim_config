@@ -32,7 +32,7 @@
 
 "colorscheme base16-default-dark
 "
-colorscheme Don
+colorscheme None 
 
 
 
