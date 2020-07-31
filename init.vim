@@ -38,7 +38,7 @@ function! ToggleExplore()
 endfunction
 
 """""""""""""""""""""""""""""""""""
-" highlighting 
+" highlighting and color
 """""""""""""""""""""""""""""""""""
 syntax on
 au Syntax c	source $VIMRUNTIME/syntax/c.vim
@@ -54,17 +54,26 @@ hi Normal guibg=NONE ctermbg=NONE
 """""""""""""""""""""""""""""""""""
 " preview tag/ close preview tags
 
+" save file
 nmap <silent> <Leader>w :w!<CR>
 "noremap <C-\> <C-w>}
 "noremap <C-]> <C-w>z
+
+" run a build script
 noremap <silent> <Leader>r :echo system(findfile('buildrun.sh', ';'))<CR>
+
+" reloads vim
 noremap <silent> <Leader>v :so $MYVIMRC<CR>
+
+" update c/c++ tags
 noremap <silent> <Leader>c :echo system(findfile('cscope.sh', ';'))<CR>:UpdateTypesFile<CR>
+
+" show/hide explorer window
 noremap <silent> <Leader>e :call ToggleExplore()<CR>
 
 """""""""""""""""""""""""""""""""""
 " notes
 """""""""""""""""""""""""""""""""""
-" Ctrl-] go to key
-" Ctrl=o go back from key
+" Ctrl-] go to tag
+" Ctrl-o go back from tag
 
