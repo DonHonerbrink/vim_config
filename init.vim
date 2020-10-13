@@ -2,9 +2,13 @@
 " general config 
 """""""""""""""""""""""""""""""""""
 set termguicolors
+set cscopeverbose
 set cscopetag
 set tabstop=4
 set shiftwidth=4
+"set softtabstop
+set expandtab
+"set softtabstop
 set autoindent
 set smartindent
 set cindent
@@ -37,17 +41,40 @@ function! ToggleExplore()
     endif
 endfunction
 
-"""""""""""""""""""""""""""""""""""
+function! BuildProject()
+	" assync 
+	let builddir = system(findfile('vimbuild.sh', '.;'))
+	silent execute 'silent make -C ' . builddir
+	redraw!
+endfunction
+
+function! BuildCScope()
+	" assync 
+	let cscope_res = system(findfile('cscope.sh', '.;'))
+	let cscope_out = findfile('cscope.out', '.;')
+	let cscope_pre = matchstr(cscope_out, ".*/")
+	if !empty(cscope_out) && filereadable(cscope_out)
+		exe "cs add " cscope_out cscope_pre
+	endif
+
+endfunction
+
+augroup quickfix
+"	autocmd!
+"   	autocmd QuickFixCmdPost [^l]* cwindow
+"   	autocmd QuickFixCmdPost   ^l* lwindow
+augroup END
+
 " highlighting and color
 """""""""""""""""""""""""""""""""""
 syntax on
 au Syntax c	source $VIMRUNTIME/syntax/c.vim
 au Syntax cpp source $VIMRUNTIME/syntax/c.vim
 
-colorscheme apprentice
+"colorscheme apprentice
+colorscheme ayu
 set cursorline
 hi Normal guibg=NONE ctermbg=NONE
-
 
 """""""""""""""""""""""""""""""""""
 " keyboard remappings
@@ -55,7 +82,7 @@ hi Normal guibg=NONE ctermbg=NONE
 " preview tag/ close preview tags
 
 " save file
-nmap <silent> <Leader>w :w!<CR>
+nmap <silent> <Leader>w :w!<CR>:call BuildProject()<CR>
 "noremap <C-\> <C-w>}
 "noremap <C-]> <C-w>z
 
@@ -66,7 +93,7 @@ noremap <silent> <Leader>r :echo system(findfile('buildrun.sh', ';'))<CR>
 noremap <silent> <Leader>v :so $MYVIMRC<CR>
 
 " update c/c++ tags
-noremap <silent> <Leader>c :echo system(findfile('cscope.sh', ';'))<CR>:UpdateTypesFile<CR>
+noremap <silent> <Leader>c :call BuildCScope()<CR>
 
 " show/hide explorer window
 noremap <silent> <Leader>e :call ToggleExplore()<CR>
