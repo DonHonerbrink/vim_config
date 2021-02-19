@@ -47,8 +47,10 @@ syntax on
 au Syntax c	source $VIMRUNTIME/syntax/c.vim
 au Syntax cpp source $VIMRUNTIME/syntax/c.vim
 
+"colorscheme ayu
+colorscheme embark
 "colorscheme apprentice
-colorscheme ayu
+"colorscheme simple-dark
 set cursorline
 hi Normal guibg=NONE ctermbg=NONE
 
