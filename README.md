@@ -1,4 +1,4 @@
-# nvim_config
+# vim_config
 My personal neovim configuration
 
 To use 
