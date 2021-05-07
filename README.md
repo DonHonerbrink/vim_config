@@ -1,7 +1,7 @@
-# nvim_config
-My personal neovim configuration
+# vim_config
+My personal vim configuration
 
-To use 
+To use
 1) backup your ~/.vim and ~/.vimrc folder 
 
 2) clone the repo to ~/.vim 
