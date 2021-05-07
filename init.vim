@@ -28,6 +28,7 @@ filetype plugin indent on
 " global variables
 """""""""""""""""""""""""""""""""""
 let g:explore_is_open = 0
+let g:quickfix_is_open = 0
 """""""""""""""""""""""""""""""""""
 " functions 
 """""""""""""""""""""""""""""""""""
@@ -41,18 +42,28 @@ function! ToggleExplore()
     endif
 endfunction
 
+function! ToggleQuickfix()
+    if g:quickfix_is_open  
+		let g:quickfix_is_open = 0
+		:cclose
+    else
+		let g:quickfix_is_open = 1
+		:copen
+    endif
+endfunction
 " highlighting and color
 """""""""""""""""""""""""""""""""""
 syntax on
 au Syntax c	source $VIMRUNTIME/syntax/c.vim
 au Syntax cpp source $VIMRUNTIME/syntax/c.vim
 
-"colorscheme ayu
-colorscheme embark
+"colorscheme atom-dark-256
+"colorscheme embark
+colorscheme tender
 "colorscheme apprentice
 "colorscheme simple-dark
 set cursorline
-hi Normal guibg=NONE ctermbg=NONE
+"hi Normal guibg=NONE ctermbg=NONE
 
 set tags=./.tags;/
 
@@ -74,7 +85,10 @@ noremap <silent> <Leader>v :so $MYVIMRC<CR>
 
 " show/hide explorer window
 noremap <silent> <Leader>e :call ToggleExplore()<CR>
-
+noremap <silent> <Leader>q :call ToggleQuickfix()<CR>
+noremap <silent> <Leader>, :cp<CR>
+noremap <silent> <Leader>. :cn<CR>
+ 
 """""""""""""""""""""""""""""""""""
 " notes
 """""""""""""""""""""""""""""""""""
