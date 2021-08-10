@@ -59,7 +59,9 @@ au Syntax cpp source $VIMRUNTIME/syntax/c.vim
 
 "colorscheme atom-dark-256
 "colorscheme embark
-colorscheme tender
+"colorscheme tender
+"colorscheme lampaces-demon
+colorscheme hotline
 "colorscheme apprentice
 "colorscheme simple-dark
 set cursorline
