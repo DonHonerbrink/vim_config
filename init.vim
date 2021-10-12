@@ -57,11 +57,14 @@ syntax on
 au Syntax c	source $VIMRUNTIME/syntax/c.vim
 au Syntax cpp source $VIMRUNTIME/syntax/c.vim
 
+"colorscheme abstract
+"colorscheme OceanicNext 
+colorscheme nord-glass
 "colorscheme atom-dark-256
 "colorscheme embark
 "colorscheme tender
 "colorscheme lampaces-demon
-colorscheme hotline
+"colorscheme hotline
 "colorscheme apprentice
 "colorscheme simple-dark
 set cursorline
@@ -84,6 +87,9 @@ noremap <silent> <Leader>r :echo system(findfile('buildrun.sh', ';'))<CR>
 noremap <silent> <Leader>c :echo system(findfile('ctags.sh', ';')) "ctags completed"<CR>
 " reloads vim
 noremap <silent> <Leader>v :so $MYVIMRC<CR>
+
+" auto-indent
+noremap <silent> <leader>f gg=G<CR>
 
 " show/hide explorer window
 noremap <silent> <Leader>e :call ToggleExplore()<CR>
