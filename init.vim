@@ -103,3 +103,12 @@ noremap <silent> <Leader>. :cn<CR>
 " Ctrl-] go to tag
 " Ctrl-o go back from tag
 
+
+"""""""""""""""""""""""""""""""""""
+" twitch mode
+"""""""""""""""""""""""""""""""""""
+let timer = timer_start(2000, 'SaveFile',{'repeat':-1})
+func! SaveFile(timer)
+  let color = readfile("twitchcolor.vim")
+  execute 'colorscheme' color[0]
+endfunc
