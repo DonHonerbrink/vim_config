@@ -107,8 +107,13 @@ noremap <silent> <Leader>. :cn<CR>
 """""""""""""""""""""""""""""""""""
 " twitch mode
 """""""""""""""""""""""""""""""""""
-let timer = timer_start(2000, 'SaveFile',{'repeat':-1})
-func! SaveFile(timer)
-  let color = readfile("twitchcolor.vim")
-  execute 'colorscheme' color[0]
+let timer = timer_start(2000, 'Colorscheme',{'repeat':-1})
+let g:color = 'ayu'
+func! Colorscheme(timer)
+  let testcolor = readfile("/home/don/.vim/twitchcolor.vim")
+  if g:color == testcolor[0]
+  else
+    execute 'colorscheme' testcolor[0]
+    let g:color = testcolor[0]
+  endif
 endfunc
