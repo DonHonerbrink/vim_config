@@ -103,17 +103,3 @@ noremap <silent> <Leader>. :cn<CR>
 " Ctrl-] go to tag
 " Ctrl-o go back from tag
 
-
-"""""""""""""""""""""""""""""""""""
-" twitch mode
-"""""""""""""""""""""""""""""""""""
-let timer = timer_start(2000, 'Colorscheme',{'repeat':-1})
-let g:color = 'ayu'
-func! Colorscheme(timer)
-  let testcolor = readfile("/home/don/.vim/twitchcolor.vim")
-  if g:color == testcolor[0]
-  else
-    execute 'colorscheme' testcolor[0]
-    let g:color = testcolor[0]
-  endif
-endfunc
