@@ -58,7 +58,6 @@ syntax on
 au Syntax c	source $VIMRUNTIME/syntax/c.vim
 au Syntax cpp source $VIMRUNTIME/syntax/cpp.vim
 
-
 colorscheme ayu
 "colorscheme abstract
 "colorscheme OceanicNext 
@@ -67,9 +66,9 @@ colorscheme ayu
 "colorscheme embark
 "colorscheme tender
 "colorscheme lampaces-demon
-"colorscheme hotline
 "colorscheme apprentice
 "colorscheme simple-dark
+
 set cursorline
 "hi Normal guibg=NONE ctermbg=NONE
 
@@ -85,18 +84,20 @@ set tags=./.tags;/
 "noremap <C-]> <C-w>z
 
 " run a build script
-noremap <silent> <Leader>b :echo system(findfile('build.sh', ';'))<CR>
-
-" run a execute script
-noremap <silent> <Leader>r :echo system(findfile('run.sh', ';'))<CR>
-
-" updates ctag symbols
-noremap <silent> <Leader>c :echo system(findfile('ctags.sh', ';')) "ctags completed"<CR>
-" runs clang-format
-"
 noremap <silent> <Leader>t :echo system(findfile('clang-format.sh', ';')) "clang-format completed"<CR>
-" reloads vim
-"
+
+if has('win32')
+    noremap <silent> <Leader>b :echo system(findfile('build.bat', ';'))<CR>
+    noremap <silent> <Leader>r :echo system(findfile('run.bat', ';'))<CR>
+    noremap <silent> <Leader>c :echo system(findfile('ctags.bat', ';')) "ctags completed"<CR>
+    noremap <silent> <Leader>t :echo system(findfile('clang-format.bat', ';')) "clang-format completed"<CR>
+else
+    noremap <silent> <Leader>b :echo system(findfile('build.sh', ';'))<CR>
+    noremap <silent> <Leader>r :echo system(findfile('run.sh', ';'))<CR>
+    noremap <silent> <Leader>c :echo system(findfile('ctags.sh', ';')) "ctags completed"<CR>
+    noremap <silent> <Leader>t :echo system(findfile('clang-format.sh', ';')) "clang-format completed"<CR>
+endif
+
 noremap <silent> <Leader>v :so $MYVIMRC<CR>
 
 " auto-indent entire file
