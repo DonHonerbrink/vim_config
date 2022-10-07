@@ -6,9 +6,7 @@ set cscopeverbose
 set cscopetag
 set tabstop=4
 set shiftwidth=4
-"set softtabstop
 set expandtab
-"set softtabstop
 set autoindent
 set smartindent
 set cindent
@@ -16,7 +14,8 @@ set backspace=indent,eol,start
 set nobackup
 set noundofile
 set scrolloff=10
-set nonumber
+"set nonumber
+set relativenumber
 set path+=** " search down into subfolders (for tab-complete)
 set wildmenu " display all matching files for tab-complete
 set wrap!
@@ -30,6 +29,7 @@ filetype plugin indent on
 """""""""""""""""""""""""""""""""""
 let g:explore_is_open = 0
 let g:quickfix_is_open = 0
+
 """""""""""""""""""""""""""""""""""
 " functions 
 """""""""""""""""""""""""""""""""""
@@ -56,18 +56,8 @@ endfunction
 """""""""""""""""""""""""""""""""""
 syntax on
 au Syntax c	source $VIMRUNTIME/syntax/c.vim
-au Syntax cpp source $VIMRUNTIME/syntax/cpp.vim
 
-colorscheme ayu
-"colorscheme abstract
-"colorscheme OceanicNext 
-"colorscheme materialbox 
-"colorscheme atom-dark-256
-"colorscheme embark
-"colorscheme tender
-"colorscheme lampaces-demon
-"colorscheme apprentice
-"colorscheme simple-dark
+colorscheme tender
 
 set cursorline
 "hi Normal guibg=NONE ctermbg=NONE
@@ -77,15 +67,6 @@ set tags=./.tags;/
 """""""""""""""""""""""""""""""""""
 " keyboard remappings
 """""""""""""""""""""""""""""""""""
-" preview tag/ close preview tags
-
-" save file
-"noremap <C-\> <C-w>}
-"noremap <C-]> <C-w>z
-
-" run a build script
-noremap <silent> <Leader>t :echo system(findfile('clang-format.sh', ';')) "clang-format completed"<CR>
-
 if has('win32')
     noremap <silent> <Leader>b :echo system(findfile('build.bat', ';'))<CR>
     noremap <silent> <Leader>r :echo system(findfile('run.bat', ';'))<CR>
@@ -109,9 +90,4 @@ noremap <silent> <Leader>q :call ToggleQuickfix()<CR>
 noremap <silent> <Leader>, :cp<CR>
 noremap <silent> <Leader>. :cn<CR>
 
-"""""""""""""""""""""""""""""""""""
-" notes
-"""""""""""""""""""""""""""""""""""
-" Ctrl-] go to tag
-" Ctrl-o go back from tag
 
