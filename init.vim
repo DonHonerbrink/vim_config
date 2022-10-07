@@ -21,6 +21,7 @@ set path+=** " search down into subfolders (for tab-complete)
 set wildmenu " display all matching files for tab-complete
 set wrap!
 set autochdir
+set formatoptions-=cro " disable auto commenting
 filetype on
 filetype plugin indent on
 
@@ -34,32 +35,34 @@ let g:quickfix_is_open = 0
 """""""""""""""""""""""""""""""""""
 function! ToggleExplore()
     if g:explore_is_open  
-		let g:explore_is_open = 0
-		:Rexplore
+        let g:explore_is_open = 0
+        :Rexplore
     else
-		let g:explore_is_open = 1
-		:Explore
+        let g:explore_is_open = 1
+        :Explore
     endif
 endfunction
 
 function! ToggleQuickfix()
     if g:quickfix_is_open  
-		let g:quickfix_is_open = 0
-		:cclose
+        let g:quickfix_is_open = 0
+        :cclose
     else
-		let g:quickfix_is_open = 1
-		:copen
+        let g:quickfix_is_open = 1
+        :copen
     endif
 endfunction
 " highlighting and color
 """""""""""""""""""""""""""""""""""
 syntax on
 au Syntax c	source $VIMRUNTIME/syntax/c.vim
-au Syntax cpp source $VIMRUNTIME/syntax/c.vim
+au Syntax cpp source $VIMRUNTIME/syntax/cpp.vim
 
+
+colorscheme ayu
 "colorscheme abstract
 "colorscheme OceanicNext 
-colorscheme nord-glass
+"colorscheme materialbox 
 "colorscheme atom-dark-256
 "colorscheme embark
 "colorscheme tender
@@ -82,13 +85,21 @@ set tags=./.tags;/
 "noremap <C-]> <C-w>z
 
 " run a build script
-noremap <silent> <Leader>r :echo system(findfile('buildrun.sh', ';'))<CR>
+noremap <silent> <Leader>b :echo system(findfile('build.sh', ';'))<CR>
 
+" run a execute script
+noremap <silent> <Leader>r :echo system(findfile('run.sh', ';'))<CR>
+
+" updates ctag symbols
 noremap <silent> <Leader>c :echo system(findfile('ctags.sh', ';')) "ctags completed"<CR>
+" runs clang-format
+"
+noremap <silent> <Leader>t :echo system(findfile('clang-format.sh', ';')) "clang-format completed"<CR>
 " reloads vim
+"
 noremap <silent> <Leader>v :so $MYVIMRC<CR>
 
-" auto-indent
+" auto-indent entire file
 noremap <silent> <leader>f gg=G<CR>
 
 " show/hide explorer window
@@ -96,7 +107,7 @@ noremap <silent> <Leader>e :call ToggleExplore()<CR>
 noremap <silent> <Leader>q :call ToggleQuickfix()<CR>
 noremap <silent> <Leader>, :cp<CR>
 noremap <silent> <Leader>. :cn<CR>
- 
+
 """""""""""""""""""""""""""""""""""
 " notes
 """""""""""""""""""""""""""""""""""
