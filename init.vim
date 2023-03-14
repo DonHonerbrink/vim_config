@@ -21,8 +21,13 @@ set wildmenu " display all matching files for tab-complete
 set wrap!
 set autochdir
 set formatoptions-=cro " disable auto commenting
+set nrformats+=alpha " with CTRL+A
+
 filetype on
 filetype plugin indent on
+
+" vim does not like c11 sometimes
+let c_no_bracket_error = 1
 
 """""""""""""""""""""""""""""""""""
 " global variables
@@ -57,7 +62,11 @@ endfunction
 syntax on
 au Syntax c	source $VIMRUNTIME/syntax/c.vim
 
-colorscheme tender
+colorscheme sorbet
+"colorscheme embark
+"colorscheme tender
+"colorscheme bore
+"colorscheme hybrid
 
 set cursorline
 "hi Normal guibg=NONE ctermbg=NONE
