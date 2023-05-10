@@ -14,8 +14,8 @@ set backspace=indent,eol,start
 set nobackup
 set noundofile
 set scrolloff=10
-"set nonumber
-set relativenumber
+set nonumber
+"set relativenumber
 set path+=** " search down into subfolders (for tab-complete)
 set wildmenu " display all matching files for tab-complete
 set wrap!
@@ -62,7 +62,8 @@ endfunction
 syntax on
 au Syntax c	source $VIMRUNTIME/syntax/c.vim
 
-colorscheme sorbet
+colorscheme quiet
+"colorscheme sorbet
 "colorscheme embark
 "colorscheme tender
 "colorscheme bore
