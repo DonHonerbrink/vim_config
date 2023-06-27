@@ -65,7 +65,8 @@ endfunction
 syntax on
 au Syntax c	source $VIMRUNTIME/syntax/c.vim
 
-colorscheme challenger_deep
+colorscheme ghdark
+"colorscheme challenger_deep
 "colorscheme nord
 "colorscheme nord-glass
 "colorscheme quiet
