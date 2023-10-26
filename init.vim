@@ -70,8 +70,14 @@ func! PrevColors()
 endfunc
 " highlighting and color
 """""""""""""""""""""""""""""""""""
-syntax on
 au Syntax c	source $VIMRUNTIME/syntax/c.vim
+
+set cursorline
+"hi Normal guibg=NONE ctermbg=NONE
+
+syntax enable
+
+set background=dark
 
 colorscheme ghdark
 "colorscheme challenger_deep
@@ -83,9 +89,6 @@ colorscheme ghdark
 "colorscheme tender
 "colorscheme bore
 "colorscheme hybrid
-
-set cursorline
-"hi Normal guibg=NONE ctermbg=NONE
 
 set tags=./.tags;/
 
