@@ -78,6 +78,7 @@ function! RunScript(script) abort
     if !empty(l:build_script)
         execute 'AsyncRun' l:build_script
         copen
+        let g:quickfix_is_open = 1
     else
         echo "build.sh not found"
     endif
