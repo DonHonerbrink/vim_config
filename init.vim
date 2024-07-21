@@ -1,3 +1,7 @@
+call plug#begin('~/.vim/plugged')
+  Plug 'skywind3000/asyncrun.vim'
+call plug#end()
+
 """""""""""""""""""""""""""""""""""
 " general config 
 """""""""""""""""""""""""""""""""""
@@ -68,6 +72,18 @@ func! PrevColors()
     let idx = index(g:colors, g:colors_name)
     return (idx - 1 < 0 ? g:colors[-1] : g:colors[idx - 1])
 endfunc
+
+function! RunScript(script) abort
+    let l:build_script = findfile(a:script, ';')
+    if !empty(l:build_script)
+        execute 'AsyncRun' l:build_script
+        copen
+    else
+        echo "build.sh not found"
+    endif
+endfunction
+
+
 " highlighting and color
 """""""""""""""""""""""""""""""""""
 au Syntax c	source $VIMRUNTIME/syntax/c.vim
@@ -96,15 +112,15 @@ set tags=./.tags;/
 " keyboard remappings
 """""""""""""""""""""""""""""""""""
 if has('win32')
-    noremap <silent> <Leader>b :echo system(findfile('build.bat', ';'))<CR>
-    noremap <silent> <Leader>d :echo system(findfile('buildrun.bat', ';'))<CR>
-    noremap <silent> <Leader>c :echo system(findfile('ctags.bat', ';')) "ctags completed"<CR>
-    noremap <silent> <Leader>t :echo system(findfile('clang-format.bat', ';')) "clang-format completed"<CR>
+    noremap <silent> <Leader>b :call RunScript('buildrun.bat')<CR>
+    noremap <silent> <Leader>d :call RunScript('buildrun.bat')<CR>
+    noremap <silent> <Leader>c :call RunScript('ctags.bat') "ctags completed"<CR>
+    noremap <silent> <Leader>t :call RunScript('clang-format.bat') "clang-format completed"<CR>
 else
-    noremap <silent> <Leader>b :echo system(findfile('build.sh', ';'))<CR>
-    noremap <silent> <Leader>d :echo system(findfile('buildrun.sh', ';'))<CR>
-    noremap <silent> <Leader>c :echo system(findfile('ctags.sh', ';')) "ctags completed"<CR>
-    noremap <silent> <Leader>t :echo system(findfile('clang-format.sh', ';')) "clang-format completed"<CR>
+    noremap <silent> <Leader>b :call RunScript('build.sh')<CR>
+    noremap <silent> <Leader>d :call RunScript('buildrun.sh')<CR>
+    noremap <silent> <Leader>c :call RunScript('ctags.sh') "ctags completed"<CR>
+    noremap <silent> <Leader>t :call RunScript('clang-format.sh') "clang-format completed"<CR>
 endif
 
 noremap <silent> <Leader>v :so $MYVIMRC<CR>
