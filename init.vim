@@ -95,7 +95,8 @@ syntax enable
 
 set background=dark
 
-colorscheme ghdark
+"colorscheme ghdark
+colorscheme simple-dark
 "colorscheme challenger_deep
 "colorscheme nord
 "colorscheme nord-glass
