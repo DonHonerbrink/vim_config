@@ -1,4 +1,6 @@
 call plug#begin('~/.vim/plugged')
+  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+  Plug 'junegunn/fzf.vim'
   Plug 'skywind3000/asyncrun.vim'
 call plug#end()
 
@@ -126,6 +128,8 @@ else
 endif
 
 noremap <silent> <Leader>v :so $MYVIMRC<CR>
+noremap <silent> <Leader>1 :Buffers<CR>
+noremap <silent> <Leader>2 :Files<CR>
 
 " auto-indent entire file
 noremap <silent> <leader>f gg=G<CR>
