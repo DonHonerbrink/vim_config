@@ -98,6 +98,7 @@ syntax enable
 
 set background=dark
 
+"colorscheme bore
 "colorscheme ghdark
 colorscheme simple-dark
 "colorscheme challenger_deep
