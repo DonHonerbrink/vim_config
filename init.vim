@@ -99,7 +99,7 @@ syntax enable
 set background=dark
 
 "colorscheme ghdark
-colorscheme simple-dark
+"colorscheme simple-dark
 "colorscheme challenger_deep
 "colorscheme nord
 "colorscheme nord-glass
@@ -108,7 +108,7 @@ colorscheme simple-dark
 "colorscheme embark
 "colorscheme tender
 "colorscheme bore
-"colorscheme hybrid
+colorscheme hybrid
 
 set tags=./.tags;/
 
