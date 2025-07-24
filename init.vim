@@ -83,6 +83,9 @@ function! RunScript(script) abort
         echohl None
         return
     endif
+    if l:build_script !~# '^/' && l:build_script !~# '^\.\/'
+        let l:build_script = './' . l:build_script
+    endif
 
     execute 'AsyncRun' l:build_script
     copen
@@ -118,7 +121,7 @@ set background=dark
 "colorscheme simple-dark
 colorscheme happy_hacking
 
-set tags=./.tags;
+set tags=./.tags\;
 
 """""""""""""""""""""""""""""""""""
 " keyboard remappings
@@ -129,10 +132,10 @@ if has('win32')
     noremap <silent> <Leader>c :call RunScript('ctags.bat') "ctags completed"<CR>
     noremap <silent> <Leader>t :call RunScript('clang-format.bat') "clang-format completed"<CR>
 else
-    noremap <silent> <Leader>b :call RunScript('./build.sh')<CR>
-    noremap <silent> <Leader>d :call RunScript('./buildrun.sh')<CR>
-    noremap <silent> <Leader>c :call RunScript('./ctags.sh') "ctags completed"<CR>
-    noremap <silent> <Leader>t :call RunScript('./clang-format.sh') "clang-format completed"<CR>
+    noremap <silent> <Leader>b :call RunScript('build.sh')<CR>
+    noremap <silent> <Leader>d :call RunScript('buildrun.sh')<CR>
+    noremap <silent> <Leader>c :call RunScript('ctags.sh') "ctags completed"<CR>
+    noremap <silent> <Leader>t :call RunScript('clang-format.sh') "clang-format completed"<CR>
 endif
 
 noremap <silent> <Leader>v :so $MYVIMRC<CR>
