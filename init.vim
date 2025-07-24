@@ -21,6 +21,7 @@ set nobackup
 set noundofile
 set scrolloff=10
 set nonumber
+set noswapfile
 "set relativenumber
 set path+=** " search down into subfolders (for tab-complete)
 set wildmenu " display all matching files for tab-complete
@@ -76,14 +77,16 @@ func! PrevColors()
 endfunc
 
 function! RunScript(script) abort
-    let l:build_script = findfile(a:script, ';')
-    if !empty(l:build_script)
-        execute 'AsyncRun' l:build_script
-        copen
-        let g:quickfix_is_open = 1
-    else
-        echo "build.sh not found"
+    let l:build_script = findfile(a:script, '.;')
+    if empty(l:build_script)
+        echomsg printf("'%s' not found", a:script)
+        echohl None
+        return
     endif
+
+    execute 'AsyncRun' l:build_script
+    copen
+        let g:quickfix_is_open = 1
 endfunction
 
 
@@ -98,6 +101,8 @@ syntax enable
 
 set background=dark
 
+"colorscheme peachpuff
+"colorscheme solarized
 "colorscheme bore
 "colorscheme ghdark
 "colorscheme simple-dark
@@ -109,9 +114,11 @@ set background=dark
 "colorscheme embark
 "colorscheme tender
 "colorscheme bore
-colorscheme hybrid
+"colorscheme hybrid
+"colorscheme simple-dark
+colorscheme happy_hacking
 
-set tags=./.tags;/
+set tags=./.tags;
 
 """""""""""""""""""""""""""""""""""
 " keyboard remappings
@@ -122,24 +129,27 @@ if has('win32')
     noremap <silent> <Leader>c :call RunScript('ctags.bat') "ctags completed"<CR>
     noremap <silent> <Leader>t :call RunScript('clang-format.bat') "clang-format completed"<CR>
 else
-    noremap <silent> <Leader>b :call RunScript('build.sh')<CR>
-    noremap <silent> <Leader>d :call RunScript('buildrun.sh')<CR>
-    noremap <silent> <Leader>c :call RunScript('ctags.sh') "ctags completed"<CR>
-    noremap <silent> <Leader>t :call RunScript('clang-format.sh') "clang-format completed"<CR>
+    noremap <silent> <Leader>b :call RunScript('./build.sh')<CR>
+    noremap <silent> <Leader>d :call RunScript('./buildrun.sh')<CR>
+    noremap <silent> <Leader>c :call RunScript('./ctags.sh') "ctags completed"<CR>
+    noremap <silent> <Leader>t :call RunScript('./clang-format.sh') "clang-format completed"<CR>
 endif
 
 noremap <silent> <Leader>v :so $MYVIMRC<CR>
 noremap <silent> <Leader>1 :Buffers<CR>
-noremap <silent> <Leader>2 :Files<CR>
+noremap <silent> <Leader>2 :GFiles<CR>
+noremap <silent> <Leader>3 :History<CR>
+noremap <silent> <Leader>s :Rg<CR>
 
 " auto-indent entire file
 noremap <silent> <leader>f gg=G<CR>
 
-" show/hide explorer window
+" qhow/hide explorer window
 noremap <silent> <Leader>e :call ToggleExplore()<CR>
 noremap <silent> <Leader>q :call ToggleQuickfix()<CR>
 noremap <silent> <Leader>, :cp<CR>
 noremap <silent> <Leader>. :cn<CR>
+inoremap jj <Esc>
 
 " cycle through colorschemes
 nnoremap <C-n> :exe "colo " .. NextColors()<CR>:colorscheme<CR>
