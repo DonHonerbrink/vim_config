@@ -2,6 +2,11 @@ call plug#begin('~/.vim/plugged')
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
   Plug 'skywind3000/asyncrun.vim'
+  Plug 'prabirshrestha/vim-lsp'
+  Plug 'mattn/vim-lsp-settings'
+  Plug 'prabirshrestha/asyncomplete.vim'
+  Plug 'prabirshrestha/asyncomplete-lsp.vim'
+
 call plug#end()
 
 """""""""""""""""""""""""""""""""""
@@ -21,12 +26,11 @@ set nobackup
 set noundofile
 set scrolloff=10
 set nonumber
-set noswapfile
 "set relativenumber
 set path+=** " search down into subfolders (for tab-complete)
 set wildmenu " display all matching files for tab-complete
 set wrap!
-set autochdir
+"set autochdir
 set formatoptions-=cro " disable auto commenting
 set nrformats+=alpha " with CTRL+A
 
@@ -77,25 +81,20 @@ func! PrevColors()
 endfunc
 
 function! RunScript(script) abort
-    let l:build_script = findfile(a:script, '.;')
-    if empty(l:build_script)
-        echomsg printf("'%s' not found", a:script)
-        echohl None
-        return
-    endif
-    if l:build_script !~# '^/' && l:build_script !~# '^\.\/'
-        let l:build_script = './' . l:build_script
-    endif
-
-    execute 'AsyncRun' l:build_script
-    copen
+    let l:build_script = findfile(a:script, ';')
+    if !empty(l:build_script)
+        execute 'AsyncRun' l:build_script
+        copen
         let g:quickfix_is_open = 1
+    else
+        echo "build.sh not found"
+    endif
 endfunction
 
 
 " highlighting and color
 """""""""""""""""""""""""""""""""""
-au Syntax c	source $VIMRUNTIME/syntax/c.vim
+"au Syntax c	source $VIMRUNTIME/syntax/c.vim
 
 set cursorline
 "hi Normal guibg=NONE ctermbg=NONE
@@ -104,8 +103,6 @@ syntax enable
 
 set background=dark
 
-"colorscheme peachpuff
-"colorscheme solarized
 "colorscheme bore
 "colorscheme ghdark
 "colorscheme simple-dark
@@ -114,14 +111,12 @@ set background=dark
 "colorscheme nord-glass
 "colorscheme quiet
 "colorscheme sorbet
-"colorscheme embark
+colorscheme embark
 "colorscheme tender
 "colorscheme bore
 "colorscheme hybrid
-"colorscheme simple-dark
-colorscheme happy_hacking
 
-set tags=./.tags\;
+set tags=./.tags;/
 
 """""""""""""""""""""""""""""""""""
 " keyboard remappings
@@ -140,21 +135,46 @@ endif
 
 noremap <silent> <Leader>v :so $MYVIMRC<CR>
 noremap <silent> <Leader>1 :Buffers<CR>
-noremap <silent> <Leader>2 :GFiles<CR>
-noremap <silent> <Leader>3 :History<CR>
-noremap <silent> <Leader>s :Rg<CR>
+noremap <silent> <Leader>2 :Files<CR>
 
 " auto-indent entire file
 noremap <silent> <leader>f gg=G<CR>
 
-" qhow/hide explorer window
+" show/hide explorer window
 noremap <silent> <Leader>e :call ToggleExplore()<CR>
 noremap <silent> <Leader>q :call ToggleQuickfix()<CR>
 noremap <silent> <Leader>, :cp<CR>
 noremap <silent> <Leader>. :cn<CR>
-inoremap jj <Esc>
 
 " cycle through colorschemes
 nnoremap <C-n> :exe "colo " .. NextColors()<CR>:colorscheme<CR>
 nnoremap <C-p> :exe "colo " .. PrevColors()<CR>:colorscheme<CR>
+
+" autocompletion
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <CR>    pumvisible() ? "\<C-y>" : "\<CR>"
+
+if executable('clangd')
+  augroup lsp_clangd
+    autocmd!
+    autocmd User lsp_setup call lsp#register_server({
+          \ 'name': 'clangd',
+          \ 'cmd': {server_info->['clangd']},
+          \ 'allowlist': ['c', 'cpp'],
+          \ })
+  augroup END
+endif
+augroup lsp_colors
+  autocmd!
+  autocmd ColorScheme * call s:ApplyLspHighlights()
+augroup END
+
+let g:lsp_semantic_enabled = 1
+let g:asyncomplete_auto_popup = 1
+let g:asyncomplete_auto_completeopt = 0
+set completeopt=menuone,noinsert,noselect
+autocmd FileType c,cpp setlocal omnifunc=lsp#complete
+set termguicolors
+
 
