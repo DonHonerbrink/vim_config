@@ -155,6 +155,18 @@ inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <CR>    pumvisible() ? "\<C-y>" : "\<CR>"
 
+let g:lsp_diagnostics_enabled = 0
+let g:lsp_diagnostics_echo_cursor = 0
+let g:lsp_diagnostics_float_cursor = 0
+let g:lsp_diagnostics_highlights_enabled = 0
+let g:lsp_diagnostics_signs_enabled = 0
+let g:lsp_diagnostics_virtual_text_enabled = 0
+"
+let g:lsp_document_highlight_enabled = 0
+let g:lsp_signature_help_enabled = 0
+let g:lsp_hover_enabled = 0
+let g:lsp_fold_enabled = 0
+let g:lsp_preview_autoclose = 1
 if executable('clangd')
   augroup lsp_clangd
     autocmd!
@@ -165,16 +177,14 @@ if executable('clangd')
           \ })
   augroup END
 endif
-augroup lsp_colors
-  autocmd!
-  autocmd ColorScheme * call s:ApplyLspHighlights()
-augroup END
 
 let g:lsp_semantic_enabled = 1
-let g:asyncomplete_auto_popup = 1
-let g:asyncomplete_auto_completeopt = 0
-set completeopt=menuone,noinsert,noselect
-autocmd FileType c,cpp setlocal omnifunc=lsp#complete
+"let g:asyncomplete_auto_popup = 1
+"let g:asyncomplete_auto_completeopt = 0
+"set completeopt=menuone,noinsert,noselect
+"autocmd FileType c,cpp setlocal omnifunc=lsp#complete
+" --- vim-lsp: coloring only ---
+
 set termguicolors
 
 
