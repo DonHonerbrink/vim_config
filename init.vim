@@ -1,13 +1,12 @@
+"""""""""""""""""""""""""""""""""""
+" plugins 
+"""""""""""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
   Plug 'skywind3000/asyncrun.vim'
-  Plug 'prabirshrestha/vim-lsp'
-  Plug 'mattn/vim-lsp-settings'
-  Plug 'prabirshrestha/asyncomplete.vim'
-  Plug 'prabirshrestha/asyncomplete-lsp.vim'
-
 call plug#end()
+
 
 """""""""""""""""""""""""""""""""""
 " general config 
@@ -70,51 +69,33 @@ function! ToggleQuickfix()
     endif
 endfunction
 
-func! NextColors()
-    let idx = index(g:colors, g:colors_name)
-    return (idx + 1 >= len(g:colors) ? g:colors[0] : g:colors[idx + 1])
-endfunc
-
-func! PrevColors()
-    let idx = index(g:colors, g:colors_name)
-    return (idx - 1 < 0 ? g:colors[-1] : g:colors[idx - 1])
-endfunc
-
 function! RunScript(script) abort
+    let l:cwd_script = getcwd() . '/' . a:script
+
+    if filereadable(l:cwd_script)
+        execute 'AsyncRun' fnameescape(l:cwd_script)
+        copen
+        let g:quickfix_is_open = 1
+        return
+    endif
+
     let l:build_script = findfile(a:script, ';')
+
     if !empty(l:build_script)
-        execute 'AsyncRun' l:build_script
+        execute 'AsyncRun' fnameescape(l:build_script)
         copen
         let g:quickfix_is_open = 1
     else
-        echo "build.sh not found"
+        echo a:script . " not found"
     endif
 endfunction
 
-
-" highlighting and color
-"""""""""""""""""""""""""""""""""""
-"au Syntax c	source $VIMRUNTIME/syntax/c.vim
-
 set cursorline
-"hi Normal guibg=NONE ctermbg=NONE
 
 syntax enable
 
-set background=dark
-
-"colorscheme bore
-"colorscheme ghdark
-"colorscheme simple-dark
-"colorscheme challenger_deep
-"colorscheme nord
-"colorscheme nord-glass
-"colorscheme quiet
-"colorscheme sorbet
-colorscheme embark
-"colorscheme tender
-"colorscheme bore
-"colorscheme hybrid
+set background=light
+colorscheme PaperColor 
 
 set tags=./.tags;/
 
@@ -146,44 +127,10 @@ noremap <silent> <Leader>q :call ToggleQuickfix()<CR>
 noremap <silent> <Leader>, :cp<CR>
 noremap <silent> <Leader>. :cn<CR>
 
-" cycle through colorschemes
-nnoremap <C-n> :exe "colo " .. NextColors()<CR>:colorscheme<CR>
-nnoremap <C-p> :exe "colo " .. PrevColors()<CR>:colorscheme<CR>
-
 " autocompletion
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <CR>    pumvisible() ? "\<C-y>" : "\<CR>"
-
-let g:lsp_diagnostics_enabled = 0
-let g:lsp_diagnostics_echo_cursor = 0
-let g:lsp_diagnostics_float_cursor = 0
-let g:lsp_diagnostics_highlights_enabled = 0
-let g:lsp_diagnostics_signs_enabled = 0
-let g:lsp_diagnostics_virtual_text_enabled = 0
-"
-let g:lsp_document_highlight_enabled = 0
-let g:lsp_signature_help_enabled = 0
-let g:lsp_hover_enabled = 0
-let g:lsp_fold_enabled = 0
-let g:lsp_preview_autoclose = 1
-if executable('clangd')
-  augroup lsp_clangd
-    autocmd!
-    autocmd User lsp_setup call lsp#register_server({
-          \ 'name': 'clangd',
-          \ 'cmd': {server_info->['clangd']},
-          \ 'allowlist': ['c', 'cpp'],
-          \ })
-  augroup END
-endif
-
-let g:lsp_semantic_enabled = 1
-"let g:asyncomplete_auto_popup = 1
-"let g:asyncomplete_auto_completeopt = 0
-"set completeopt=menuone,noinsert,noselect
-"autocmd FileType c,cpp setlocal omnifunc=lsp#complete
-" --- vim-lsp: coloring only ---
 
 set termguicolors
 
