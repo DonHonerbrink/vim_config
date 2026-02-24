@@ -44,6 +44,7 @@ let c_no_bracket_error = 1
 """""""""""""""""""""""""""""""""""
 let g:explore_is_open = 0
 let g:quickfix_is_open = 0
+let g:asyncrun_pathfix = 1
 let g:colors = getcompletion('', 'color')
 
 """""""""""""""""""""""""""""""""""
@@ -73,7 +74,9 @@ function! RunScript(script) abort
     let l:cwd_script = getcwd() . '/' . a:script
 
     if filereadable(l:cwd_script)
-        execute 'AsyncRun' fnameescape(l:cwd_script)
+        let l:cwd_script_abs = fnamemodify(l:cwd_script, ':p')
+        let l:cwd_script_dir = fnamemodify(l:cwd_script_abs, ':h')
+        execute 'AsyncRun -cwd=' . fnameescape(l:cwd_script_dir) . ' ' . fnameescape(l:cwd_script_abs)
         copen
         let g:quickfix_is_open = 1
         return
@@ -82,7 +85,9 @@ function! RunScript(script) abort
     let l:build_script = findfile(a:script, ';')
 
     if !empty(l:build_script)
-        execute 'AsyncRun' fnameescape(l:build_script)
+        let l:build_script_abs = fnamemodify(l:build_script, ':p')
+        let l:build_script_dir = fnamemodify(l:build_script_abs, ':h')
+        execute 'AsyncRun -cwd=' . fnameescape(l:build_script_dir) . ' ' . fnameescape(l:build_script_abs)
         copen
         let g:quickfix_is_open = 1
     else
@@ -94,7 +99,7 @@ set cursorline
 
 syntax enable
 
-set background=light
+set background=dark
 colorscheme PaperColor 
 
 set tags=./.tags;/
