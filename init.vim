@@ -17,8 +17,6 @@ set cscopetag
 set tabstop=4
 set shiftwidth=4
 set expandtab
-set autoindent
-set smartindent
 set cindent
 set backspace=indent,eol,start
 set nobackup
@@ -95,12 +93,9 @@ function! RunScript(script) abort
     endif
 endfunction
 
-set cursorline
-
 syntax enable
 
-set background=dark
-colorscheme PaperColor 
+colorscheme None 
 
 set tags=./.tags;/
 
