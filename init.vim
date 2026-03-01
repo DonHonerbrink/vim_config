@@ -30,6 +30,7 @@ set wrap!
 "set autochdir
 set formatoptions-=cro " disable auto commenting
 set nrformats+=alpha " with CTRL+A
+set splitbelow
 
 filetype on
 filetype plugin indent on
@@ -95,7 +96,10 @@ endfunction
 
 syntax enable
 
-colorscheme None 
+"colorscheme None 
+set background=dark
+let g:gruvbox_contrast_dark = 'hard'
+colorscheme gruvbox
 
 set tags=./.tags;/
 
@@ -131,6 +135,9 @@ noremap <silent> <Leader>. :cn<CR>
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <CR>    pumvisible() ? "\<C-y>" : "\<CR>"
+
+" Align entire file as CSV
+vnoremap <leader>ca :>!column -t <CR>
 
 set termguicolors
 
