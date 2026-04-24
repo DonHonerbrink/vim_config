@@ -5,6 +5,10 @@ call plug#begin('~/.vim/plugged')
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
   Plug 'skywind3000/asyncrun.vim'
+  Plug 'prabirshrestha/vim-lsp'
+  Plug 'mattn/vim-lsp-settings'
+  Plug 'prabirshrestha/asyncomplete.vim'
+  Plug 'prabirshrestha/asyncomplete-lsp.vim'
 call plug#end()
 
 
@@ -95,13 +99,34 @@ function! RunScript(script) abort
 endfunction
 
 syntax enable
-
-"colorscheme None 
-set background=dark
-let g:gruvbox_contrast_dark = 'hard'
-colorscheme gruvbox
+let ayucolor="mirage"
+colorscheme ayu
+"colorscheme PaperColor
+"colorscheme borlandp
+"colorscheme simple-dark
+"colorscheme retrobox
+"colorscheme gruvbox
+"colorscheme dosbox
 
 set tags=./.tags;/
+
+let g:lsp_diagnostics_echo_cursor = 1
+let g:lsp_diagnostics_virtual_text_enabled = 0
+let g:asyncomplete_auto_popup = 1
+
+function! s:on_lsp_buffer_enabled() abort
+    setlocal omnifunc=lsp#complete
+    if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+    nmap <buffer> gd <plug>(lsp-definition)
+    nmap <buffer> gr <plug>(lsp-references)
+    nmap <buffer> K  <plug>(lsp-hover)
+    nmap <buffer> <Leader>rn <plug>(lsp-rename)
+endfunction
+
+augroup lsp_install
+    au!
+    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+augroup END
 
 """""""""""""""""""""""""""""""""""
 " keyboard remappings
