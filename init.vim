@@ -100,19 +100,22 @@ endfunction
 
 syntax enable
 let ayucolor="mirage"
-colorscheme ayu
+"colorscheme None
+"colorscheme ayu
 "colorscheme PaperColor
 "colorscheme borlandp
-"colorscheme simple-dark
+"colorscheme borland
+colorscheme simple-dark
+"colorscheme elflord
 "colorscheme retrobox
 "colorscheme gruvbox
 "colorscheme dosbox
 
 set tags=./.tags;/
 
-let g:lsp_diagnostics_echo_cursor = 1
+let g:lsp_diagnostics_echo_cursor = 0
 let g:lsp_diagnostics_virtual_text_enabled = 0
-let g:asyncomplete_auto_popup = 1
+let g:asyncomplete_auto_popup = 0
 
 function! s:on_lsp_buffer_enabled() abort
     setlocal omnifunc=lsp#complete
@@ -132,7 +135,7 @@ augroup END
 " keyboard remappings
 """""""""""""""""""""""""""""""""""
 if has('win32')
-    noremap <silent> <Leader>b :call RunScript('buildrun.bat')<CR>
+    noremap <silent> <Leader>b :call RunScript('build.bat')<CR>
     noremap <silent> <Leader>d :call RunScript('buildrun.bat')<CR>
     noremap <silent> <Leader>c :call RunScript('ctags.bat') "ctags completed"<CR>
     noremap <silent> <Leader>t :call RunScript('clang-format.bat') "clang-format completed"<CR>
