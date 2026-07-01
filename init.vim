@@ -1,19 +1,5 @@
 """""""""""""""""""""""""""""""""""
-" plugins 
-"""""""""""""""""""""""""""""""""""
-call plug#begin('~/.vim/plugged')
-  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-  Plug 'junegunn/fzf.vim'
-  Plug 'skywind3000/asyncrun.vim'
-  Plug 'prabirshrestha/vim-lsp'
-  Plug 'mattn/vim-lsp-settings'
-  Plug 'prabirshrestha/asyncomplete.vim'
-  Plug 'prabirshrestha/asyncomplete-lsp.vim'
-call plug#end()
-
-
-"""""""""""""""""""""""""""""""""""
-" general config 
+" general config
 """""""""""""""""""""""""""""""""""
 set termguicolors
 set cscopeverbose
@@ -47,14 +33,12 @@ let c_no_bracket_error = 1
 """""""""""""""""""""""""""""""""""
 let g:explore_is_open = 0
 let g:quickfix_is_open = 0
-let g:asyncrun_pathfix = 1
-let g:colors = getcompletion('', 'color')
 
 """""""""""""""""""""""""""""""""""
-" functions 
+" functions
 """""""""""""""""""""""""""""""""""
 function! ToggleExplore()
-    if g:explore_is_open  
+    if g:explore_is_open
         let g:explore_is_open = 0
         :Rexplore
     else
@@ -64,7 +48,7 @@ function! ToggleExplore()
 endfunction
 
 function! ToggleQuickfix()
-    if g:quickfix_is_open  
+    if g:quickfix_is_open
         let g:quickfix_is_open = 0
         :cclose
     else
@@ -75,27 +59,20 @@ endfunction
 
 function! RunScript(script) abort
     let l:cwd_script = getcwd() . '/' . a:script
+    let l:script_abs = filereadable(l:cwd_script) ? l:cwd_script : findfile(a:script, ';')
 
-    if filereadable(l:cwd_script)
-        let l:cwd_script_abs = fnamemodify(l:cwd_script, ':p')
-        let l:cwd_script_dir = fnamemodify(l:cwd_script_abs, ':h')
-        execute 'AsyncRun -cwd=' . fnameescape(l:cwd_script_dir) . ' ' . fnameescape(l:cwd_script_abs)
-        copen
-        let g:quickfix_is_open = 1
+    if empty(l:script_abs)
+        echo a:script . " not found"
         return
     endif
 
-    let l:build_script = findfile(a:script, ';')
-
-    if !empty(l:build_script)
-        let l:build_script_abs = fnamemodify(l:build_script, ':p')
-        let l:build_script_dir = fnamemodify(l:build_script_abs, ':h')
-        execute 'AsyncRun -cwd=' . fnameescape(l:build_script_dir) . ' ' . fnameescape(l:build_script_abs)
-        copen
-        let g:quickfix_is_open = 1
-    else
-        echo a:script . " not found"
-    endif
+    let l:script_abs = fnamemodify(l:script_abs, ':p')
+    let l:script_dir = fnamemodify(l:script_abs, ':h')
+    let l:cmd = 'cd ' . shellescape(l:script_dir) . ' && ' . shellescape(l:script_abs) . ' 2>&1'
+    let l:output = systemlist(l:cmd)
+    call setqflist([], ' ', {'title': a:script, 'lines': l:output})
+    copen
+    let g:quickfix_is_open = 1
 endfunction
 
 syntax enable
@@ -108,28 +85,9 @@ let ayucolor="mirage"
 colorscheme simple-dark
 "colorscheme elflord
 "colorscheme retrobox
-"colorscheme gruvbox
 "colorscheme dosbox
 
 set tags=./.tags;/
-
-let g:lsp_diagnostics_echo_cursor = 0
-let g:lsp_diagnostics_virtual_text_enabled = 0
-let g:asyncomplete_auto_popup = 0
-
-function! s:on_lsp_buffer_enabled() abort
-    setlocal omnifunc=lsp#complete
-    if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
-    nmap <buffer> gd <plug>(lsp-definition)
-    nmap <buffer> gr <plug>(lsp-references)
-    nmap <buffer> K  <plug>(lsp-hover)
-    nmap <buffer> <Leader>rn <plug>(lsp-rename)
-endfunction
-
-augroup lsp_install
-    au!
-    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
-augroup END
 
 """""""""""""""""""""""""""""""""""
 " keyboard remappings
@@ -147,8 +105,6 @@ else
 endif
 
 noremap <silent> <Leader>v :so $MYVIMRC<CR>
-noremap <silent> <Leader>1 :Buffers<CR>
-noremap <silent> <Leader>2 :Files<CR>
 
 " auto-indent entire file
 noremap <silent> <leader>f gg=G<CR>
@@ -166,7 +122,4 @@ inoremap <expr> <CR>    pumvisible() ? "\<C-y>" : "\<CR>"
 
 " Align entire file as CSV
 vnoremap <leader>ca :>!column -t <CR>
-
-set termguicolors
-
 
